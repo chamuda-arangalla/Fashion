@@ -8,8 +8,12 @@ connectDB();
  
 const app = express();
 
+//middlware for post request
+app.use(express.json())
+app.use(express.urlencoded({ extended:false }))
+
 app.use("/api/goals", require("./routes/routes"));
 
-//set up connection to database
+//set up server connection 
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
