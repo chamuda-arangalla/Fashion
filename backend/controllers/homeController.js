@@ -1,17 +1,33 @@
+
+const Inventory = require("../models/Inventory")
+
 // @desc GET GOALS
 // @route GET api/goals
 // @access Private
-const getGoals = (req,res) => {
-    
-    res.status(200).json({ messege:"get goals" })
+const getItems = async(req,res) => {
+    try {
+        const items = await Inventory.find()
+        res.status(200).json(items)
+    } catch (err) {
+   
+        res.status(500).json({ error: "Internal Server Error" ,message: err});
+    }
+
 }
 
 // @desc SET GOAL
 // @route POST api/goals
 // @access Private
-const setGoal = (req,res)=>{
-    console.log(req.body)
-    res.status(200).json({ messege:"set goal" })
+const setItems = async(req,res)=>{
+
+  try {
+    const newItem = new Inventory(req.body);
+    await newItem.save();
+    res.status(201).json({ message: "item added successfully", Item: newItem });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 }
 
 // @desc UPDATE GOAL
@@ -31,8 +47,8 @@ const deleteGoal = (req,res)=>{
 }
 
 module.exports = {
-    getGoals,
-    setGoal,
+    getItems,
+    setItems,
     updateGoal,
     deleteGoal,
 }
