@@ -18,11 +18,18 @@ import AddShoppingCartTwoToneIcon from "@mui/icons-material/AddShoppingCartTwoTo
 
 import "../Home.css";
 import Banner from "../components/Layout/Banner";
+import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
+import { getItems } from "../api/Home";
 
 
 
 
 const Home = () => {
+
+getItems()
+
+
   const [value, setValue] = useState(0);
   const [produtDetails , setProductDetails] = useState([
     {
