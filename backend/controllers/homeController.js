@@ -1,8 +1,8 @@
 
 const Inventory = require("../models/Inventory")
 
-// @desc GET GOALS
-// @route GET api/goals
+// @desc GET ITEMS
+// @route GET api/items
 // @access Private
 const getItems = async(req,res) => {
     try {
@@ -15,8 +15,8 @@ const getItems = async(req,res) => {
 
 }
 
-// @desc SET GOAL
-// @route POST api/goals
+// @desc SET ITEM
+// @route POST api/items
 // @access Private
 const setItems = async(req,res)=>{
 
@@ -30,16 +30,16 @@ const setItems = async(req,res)=>{
   }
 }
 
-// @desc UPDATE GOAL
-// @route PUT api/goals/id
+// @desc UPDATE ITEM
+// @route PUT api/items/id
 // @access Private
 const updateGoal = (req,res)=>{
     
     res.status(200).json({ messege:`update goal - ${req.params.id}` })
 }
 
-// @desc DELETE GOAL
-// @route DELETE api/goals/id
+// @desc DELETE ITEM
+// @route DELETE api/items/id
 // @access Private
 const deleteGoal = (req,res)=>{
     
