@@ -30,27 +30,27 @@ const Home = () => {
 
 
   //APIS
-
-  // componentDidMount = () => {
-    
-  // }
   
  const fetchItems  = async()=>{
 
   await axios.get(`${BASE_URL}/items`).then(response => {
-      this.setProductDetails(response.data)
+      setProductDetails(response.data)
     })
     .catch(error => {
       console.error('AxiosError:', error);
     })
 }
 
+// calling api functions
+useEffect(()=>{
+  fetchItems()
+},[])
+
 
   return (
     <div>
       <Banner />
       <h1 className="Trending">Trending</h1>
-      <hr />
       <div className="Cards">
         <br />
 {

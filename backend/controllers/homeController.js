@@ -33,22 +33,46 @@ const setItems = async(req,res)=>{
 // @desc UPDATE ITEM
 // @route PUT api/items/id
 // @access Private
-const updateGoal = (req,res)=>{
+const updateItem = async(req,res)=>{
     
-    res.status(200).json({ messege:`update goal - ${req.params.id}` })
+  const id = req.params.id
+  const body = req.body
+  const itemId = Inventory.findById(req.params.id)
+ try{
+
+    if(!itemId){
+      res.status(400).json({message:"Item not found!!"})
+    }else{
+      const updatedItem = await Inventory.findByIdAndUpdate( id , body )
+      res.status(201).json({ message: "item updated successfully", updated_item: updatedItem})
+    }
+  }catch(err){
+    res.status(500).json({ message: err.message })
+  }
+ 
+  
 }
 
 // @desc DELETE ITEM
 // @route DELETE api/items/id
 // @access Private
-const deleteGoal = (req,res)=>{
+const deleteItem = async(req,res)=>{
     
-    res.status(200).json({ messege:`delete goal - ${req.params.id}` })
+    const id = req.params.id
+    const itemId = Inventory.findById(id)
+
+
+    try {
+      const deletedItem = await Inventory.findByIdAndDelete(id)
+      res.status(200).json({message:"Item deleted successfully", deleted_item : deletedItem})
+    } catch (err) {
+      res.status(500).send({ status: "Error with delete Product", error: err.message });
+    }
 }
 
 module.exports = {
     getItems,
     setItems,
-    updateGoal,
-    deleteGoal,
+    updateItem,
+    deleteItem,
 }
